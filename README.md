@@ -23,3 +23,10 @@ This exists for the common, narrow case of needing all primes up to a moderate b
 - `limit < 2` returns an empty array (or `0` for `primeCount`).
 - `isPrime` rejects non-safe-integers, including fractional values and values above `Number.MAX_SAFE_INTEGER`, because primality testing of arbitrary-precision integers is out of scope.
 - Both functions reject non-integer and negative inputs with a `RangeError`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
